@@ -27,38 +27,31 @@ py -m venv Projet3A
 ```python
 .\Projet3A\Scripts\activate
 ```
-
-
+ou sur Linux
+```python
+source Projet3A/bin/activate
+```
 ```python
 cd Projet3A
 ```
 
-### b) Importation du modèle Yolov5 initial et installation des packages nécessaires
+### b) Importation du modèle Yolov8 initial et installation des packages nécessaires
 
 
 
 ```python
-git clone https://github.com/ultralytics/yolov5
+pip install ultralytics
 ```
-
-
-```python
-cd yolov5
-```
-
-
-```python
-git reset --hard 064365d8683fd002e9ad789c1e91fa3d021b44f0
-```
-
-Après qu'on a importé le modèle Yolov5, il faut installer les packages nécessaires par de suite, d'où sert le fichier requirements.txt dans le dossier yolov5. Or, on utilise d'autres packages en plus des packages du modèle initial et pour régler ceci j'ai modifié le fichier requirements.txt en y rajoutant les autres packages nécessaires
-
-Donc il faut remplacer le fichier requirements.txt dans le fichier requirement que vous pouvez trouver sur le github avec le même nom (requirements.txt) et éxécuter la commande suivante
-
+Si la commande ne marche pas vous pouvez exécuter celle ci :
 
 ```python
 pip install -r requirements.txt
 ```
+Cette commande doit installer Yolov8 automatiquement dans votre environnement virtuel.
+Donc il faut remplacer le fichier requirements.txt dans le fichier requirement que vous pouvez trouver sur le github avec le même nom (requirements.txt) et éxécuter la commande suivante
+
+
+
 
 ### c) Structure des données
 
