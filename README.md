@@ -48,20 +48,10 @@ Si la commande ne marche pas vous pouvez exécuter celle ci :
 pip install -r requirements.txt
 ```
 Cette commande doit installer Yolov8 automatiquement dans votre environnement virtuel.
-Donc il faut remplacer le fichier requirements.txt dans le fichier requirement que vous pouvez trouver sur le github avec le même nom (requirements.txt) et éxécuter la commande suivante
-
-
-
 
 ### c) Structure des données
 
 Vu qu'on utilise le modèle initial pour l'adapter à notre dataset, il faut inclure les fichiers de notre dataset dans le dossier yolov5.
-Premièrement, il faut mettre le fichier lesions.yaml (un fichier indiquant au modèle les chemins d'accès des bases de données d'entraînement, validation et test) dans le dossier data.
-
-Deuxièmement, il faut mettre le script lesions_data.py (fichier de conversion et répartition des données) dans le dossier yolov5 .
-
-Après qu'on a organisé le dossier yolov5, on peut passer à la conversion et répartition des donnnées en premiers temps: Pour cela, il faut avoir les chemins d'accès des deux dossiers (dossier pour les fichiers xml et un autre pour les images DICOM)
-
 
 ```python
 python lesions_data.py chemin/vers/fichier/xml  chemin/vers/images
@@ -93,9 +83,15 @@ weights: Pour montrer au modèle les poids donnés au paramétres au début (on 
 
 La configuration optimale a été trouvée à l'aide de cette configuration (Entraînement du modèle yolov5s sur des images de (1200,1200) avec un batch de 32)
 
+```python
+mkdir ../datasets
+```
+```python
+mv lesions ../datasets
+```
 
 ```python
-python train.py --data lesions.yaml --epochs 600 --weights '' --img 1024 --cfg ./models/yolov5m.yaml
+yolo detect train data=lesions.yaml model=yolov8m.pt epochs=200 imgsz=1024
 ```
 
 Après l'entraînement, le modèle crée un dossier train dans runs contenant les résultats d'entraînemnt, les paramètres du modèle optimal trouvé sous forme de fichiet pt (best.pt), et la prédiction du modèle sur les images de validation
