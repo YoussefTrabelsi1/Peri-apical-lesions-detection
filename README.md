@@ -102,17 +102,16 @@ La commande ci-dessus a permis de trouver la configuration optimale que j'ai mis
 
 2) Refaire un entraînement du modèle à partir de cette configuration (dans le cas d'ajout de nouvelles images ou qu'on veut changer de nombre d'epochs ou dimensions d'images
 
-Pour la prédiction on utilise le fichier val.py qui utilise le modèle yolov5 avec la configuration en argument pour prédire sur les images de test ou de validation (on met le nom de la base de données en argument --task)
-
-
-```python
-python val.py --weights finalbest.pt  --task test --data lesions.yaml --img 1200
-```
-
-Pour la détection sur des nouvelles images on utilise le fichier detect.py 
+Pour la détection sur des nouvelles images, il faut créer un fichier Python. Vous pouvez le nommez comme vous voulez. (Dans ce cas je vais le nommer detect.py) 
 
 ```python
-python detect.py --weights finalbest.pt --source chemin/vers/images --img 1200
+from ultralytics import YOLO
+
+# Load a pretrained YOLOv8n model
+model = YOLO('best.pt')
+images=["path/to/image","path/to/image"] #Vous pouvez mettre le nombre que vous voulez d'images dans cette liste
+for elt in images
+    model.predict(elt,imgsz=1024, save_conf=True, verbose=False,save_txt=True)
 ```
 
 
@@ -136,7 +135,7 @@ python detect.py --weights finalbest.pt --source chemin/vers/images --img 1200
 La métrique utilisée pour l'évaluation est basée sur l'IoU définie par le quotient de la surface de l'intersection entre la zone prédite et la zone réelle  sur la surface d'union de ces deux zones.
 map@0.5 définit la précision moyenne avec un seuil de 0.5 pour l'IoU (i.e on ne considére qu'un résultat est vrai positif que si l'IoU dépasse le seuil de 0.5.
 Les résultats peuvent être résumés dans ce tableau :
-|                 | Yolov5          |
+|                 | Yolov8          |
 | --------------- | --------------- |
 | Précision       | 0.999           |
 | Recall          | 0.836           |
@@ -162,5 +161,5 @@ On peut aussi visualiser les résultats en faisant les prédictions sur l'ensemb
 </table>
 
 
-
+Ce projet est la continuation d'un autre projet. Voici le lien du projet d'origine : https://github.com/achraflouzali/Peri-apical-lesions-detection 
 Pour plus de détails n'hésitez pas à me contacter par mail: yousseftrabelsi250@gmail.com
